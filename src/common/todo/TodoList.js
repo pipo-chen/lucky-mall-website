@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import{connect} from 'react-redux';
-import * as constants from './store/constants'
 import {InputButton} from './style'
 import {getList, getHandleClickAction,getHandleDeleteAction, getBlurAction,getFocusAction,getInputAction} from '../todo/store/actionCreators'
 
@@ -16,7 +15,7 @@ class TodoList extends Component {
                     {
                         this.props.list.map((item,index)=>{
                             return <li onClick={()=>this.props.handleDelete(index)} key={index}>{item}</li>
-                        })
+                      })
                     }
                 </ul>
                 
@@ -28,9 +27,9 @@ class TodoList extends Component {
 const mapStateToProps = (state) => {
     console.log(state.todo)
     return {
-        inputValue: state.todo.inputValue,
-        list: state.todo.list,
-        focused: state.todo.focused
+        inputValue: state.todo.get("inputValue"),
+        list: state.todo.get("list"),
+        focused: state.todo.get("focused")
     }
 }
 
@@ -42,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         },
         handleClick() {
-            // const action = getHandleClickAction();
+            const action1 = getHandleClickAction();
             const action = getList();
             dispatch(action);
         },

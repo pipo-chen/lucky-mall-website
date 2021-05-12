@@ -23,7 +23,7 @@ export const getFocusAction =() => ({
     type: constants.FOCUS_ITEM
 });
 
-export const changeList = (data) => ({
+const changeList = (data) => ({
     type: constants.CHANGE_LIST,
     data: data
 })
