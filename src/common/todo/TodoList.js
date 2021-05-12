@@ -2,24 +2,9 @@ import React, {Component} from 'react';
 import{connect} from 'react-redux';
 import * as constants from './store/constants'
 import {InputButton} from './style'
-import {getInputAction, getHandleClickAction,getHandleDeleteAction, getBlurAction,getFocusAction} from '../todo/store/actionCreators'
+import {getList, getHandleClickAction,getHandleDeleteAction, getBlurAction,getFocusAction,getInputAction} from '../todo/store/actionCreators'
 
 class TodoList extends Component {
-    getInputItem = (show) => {
-        if (show) {
-            return(
-                <ul>
-                {
-                    this.props.list.map((item,index)=>{
-                        return <li onClick={()=>this.props.handleDelete(index)} key={index}>{item}</li>
-                     })
-                }
-                </ul>
-            )
-        } else {
-            return null;
-        }
-    }
     render() {
         return(
             <div>
@@ -27,7 +12,14 @@ class TodoList extends Component {
                     <InputButton value={this.props.inputValue} onChange={this.props.changeInputValue} className={this.props.focused? 'focused' : ''} onBlur={this.props.blurHandle} onFocus = {this.props.focusHandle}></InputButton>
                     <button onClick={this.props.handleClick}>提交</button>
                 </div>
-                {this.getInputItem(this.props.focused)}
+                <ul>
+                    {
+                        this.props.list.map((item,index)=>{
+                            return <li onClick={()=>this.props.handleDelete(index)} key={index}>{item}</li>
+                        })
+                    }
+                </ul>
+                
             </div>
         )
     }
@@ -50,7 +42,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         },
         handleClick() {
-            const action = getHandleClickAction();
+            // const action = getHandleClickAction();
+            const action = getList();
             dispatch(action);
         },
         handleDelete(index) {

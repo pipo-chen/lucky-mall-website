@@ -1,4 +1,5 @@
 import * as constants from '../store/constants'
+import axios from 'axios';
 
 export const getInputAction = (value) => ({
     type: constants.CHANGE_INPUT_VALUE,
@@ -6,8 +7,7 @@ export const getInputAction = (value) => ({
 });
 
 export const getHandleClickAction = ()=> ({
-   
-    type: constants.GET_LIST
+    type: constants.ADD_ITEM
 });
 
 export const getHandleDeleteAction = (index)=> ({
@@ -22,3 +22,20 @@ export const getBlurAction = ()=>({
 export const getFocusAction =() => ({
     type: constants.FOCUS_ITEM
 });
+
+export const changeList = (data) => ({
+    type: constants.CHANGE_LIST,
+    data: data
+})
+
+export const getList = ()=> {
+    return(dispatch) => {
+        axios.get('/admin/test.do').then((res)=>{
+            const data = res.data.data;
+            const action = changeList(data);
+            dispatch(action);
+        }).catch(()=> {
+            console.log("error");
+        })
+    }
+}

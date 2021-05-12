@@ -28,6 +28,11 @@ export default (state = {inputValue:'init', list:["item1","item2"], focused: tru
         newState.focused = true;
         return newState;
     }
+    if (action.type === constants.CHANGE_LIST) {
+        const newState = JSON.parse(JSON.stringify(state));
+        newState.list.push(...action.data);
+        return newState;
+    }
 
     return state;
 }

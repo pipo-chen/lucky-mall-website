@@ -4,3 +4,4 @@ export const DELETE_ITEM = 'todo/delete_item';
 export const BLUR_ITEM = 'todo/blur_item';
 export const FOCUS_ITEM = 'todo/focus_item';
 export const GET_LIST = 'todo/get_list';
+export const CHANGE_LIST = "todo/change_list";
