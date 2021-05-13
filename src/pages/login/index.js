@@ -7,21 +7,32 @@ import {
     Button
 } from './style'
 import {loginApp} from './store/actionCreators'
+
 class Login extends PureComponent {
     render() {
             
-        if (!this.props.login) {
-
+        if (this.props.login) {
             return (
                     <LoginBox>
                         <Input placeholder="用户名" ref={(input) => {this.account = input}}></Input>
                         <Input placeholder="密码" type="password" ref={(input) => {this.password = input}}></Input>
                         <Button onClick={()=>this.props.loginApp(this.account, this.password)}>登录</Button>
                         <Link to='/register'>注册</Link>
+                        <Link to='/home'>进入</Link>
                     </LoginBox>
             )
         } else {
-            return (<p>登录成功</p>)
+            return(
+                <LoginBox>
+                        <Input placeholder="用户名" ref={(input) => {this.account = input}}></Input>
+                        <Input placeholder="密码" type="password" ref={(input) => {this.password = input}}></Input>
+                        <Button onClick={()=>this.props.loginApp(this.account, this.password)}>登录</Button>
+                        <Link to='/register'>注册</Link>
+                        <Link to='/home'>进入</Link>
+                        <p>登录失败</p>
+                    </LoginBox>
+             
+            )
         }
     }
 }
