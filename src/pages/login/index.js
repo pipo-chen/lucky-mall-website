@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom';
 import {
     LoginBox,
     Input,
@@ -12,6 +13,8 @@ class Login extends PureComponent {
                     <Input placeholder="用户名"></Input>
                     <Input placeholder="密码"></Input>
                     <Button>登录</Button>
+                    <Link to='/register'>注册</Link>
+
                 </LoginBox>
         )
     }
@@ -25,4 +28,4 @@ const mapDispatch = (dispatch) => ({
 
 })
 
-export default Login;//connect(mapState, mapDispatch)(Login);
+export default connect(mapState, mapDispatch)(Login);

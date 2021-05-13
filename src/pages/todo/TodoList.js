@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import{connect} from 'react-redux';
 import {InputButton} from './style'
-import {getList, getHandleClickAction,getHandleDeleteAction, getBlurAction,getFocusAction,getInputAction} from '../todo/store/actionCreators'
+import {getList, getHandleClickAction,getHandleDeleteAction, getBlurAction,getFocusAction,getInputAction} from './store/actionCreators'
 
 class TodoList extends Component {
+    loginOrnot = (login) => {
+        if (login) {
+            return(
+            <p>wahahahahha</p>
+            )
+        } else {
+            return(
+            <p>nooooooooo</p>
+            )
+        }
+    }
     render() {
         return(
             <div>
@@ -18,8 +29,12 @@ class TodoList extends Component {
                       })
                     }
                 </ul>
-                
+                <div>
+                {this.loginOrnot(this.props.login)}
+                </div>
             </div>
+                            
+
         )
     }
 }
@@ -29,7 +44,8 @@ const mapStateToProps = (state) => {
     return {
         inputValue: state.todo.get("inputValue"),
         list: state.todo.get("list"),
-        focused: state.todo.get("focused")
+        focused: state.todo.get("focused"),
+        login: state.login.get("login")
     }
 }
 
