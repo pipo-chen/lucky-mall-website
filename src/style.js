@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-
+import styled from 'styled-components';
 
 createGlobalStyle`
 	html, body, div, span, applet, object, iframe,
@@ -46,14 +46,9 @@ createGlobalStyle`
 		border-spacing: 0;
 	}
 `
-
-
-export const GlobalStyled = createGlobalStyle 
-`
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: green;
-}
+export const Container = styled.div`
+position: absolute;
+background-color: green;
+width: 100%;
+height: 100%;
 `

@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style.js'
+import {Container} from './style.js'
 import App from './App'
 ReactDOM.render(
-  <div className='hello'>
-       <App/>
-    </div>,
+       <App/>,
   document.getElementById('root')
 );
 

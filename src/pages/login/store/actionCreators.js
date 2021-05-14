@@ -8,7 +8,12 @@ const changeLogin = (value) => ({
 
 export const loginApp = (account, password) => {
     return(dispatch) => {
-        axios.get('/admin/login.do?loginUserName='+account+"&loginPassword="+password).then((res)=>{
+        const f = new FormData()
+        f.append('loginUserName',account)
+        f.append('loginPassword',password)
+        
+        console.log(account, password, f);
+        axios.post('/admin/login.do',f).then((res)=>{
             if (res.data.status == 0) {
                 console.log(res.data.msg);
                 const action = changeLogin(true);
