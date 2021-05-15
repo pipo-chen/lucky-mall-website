@@ -1,0 +1,1 @@
+export const CHANGE_DATA = 'goods/change_data';

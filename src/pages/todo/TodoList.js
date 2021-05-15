@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         },
         handleClick() {
-            const action1 = getHandleClickAction();
+            // const action1 = getHandleClickAction();
             const action = getList();
             dispatch(action);
         },

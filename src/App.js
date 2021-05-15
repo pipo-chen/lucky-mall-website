@@ -1,5 +1,4 @@
 import Header from './pages/header/index'
-import TodoList from './pages/todo/TodoList'
 import Login from './pages/login'
 import Register from './pages/register'
 import Home from './pages/home'
@@ -14,7 +13,6 @@ function App() {
     <Provider store = {store}>
       <BrowserRouter>
       <div>
-        {/* <Route path='/' exact  component={TodoList}></Route> */}
         <Route path='/header' exact component={Header}></Route> 
         <Route path='/'  exact component={Login}></Route>
         <Route path='/register' exact component={Register}></Route>
