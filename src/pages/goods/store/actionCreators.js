@@ -6,16 +6,17 @@ const changeData = (data) => ({
     data: data
 })
 
-export const getList = () => {
+export const getList = (pageNum, pageSize) => {
     return(dispatch) => {
+        console.log(pageNum, pageSize)
         const f = new FormData()
-        f.append('pageNum',"1")
-        f.append('pageSize',"5")
+        f.append('pageNum',pageNum)
+        f.append('pageSize',pageSize)
         
         axios.post('/goods/list.do',f).then((res)=>{
             if (res.data.status == 0) {
                 console.log(res.data.msg);
-                const action = changeData(res.data.data.list);
+                const action = changeData(res.data.data);
                 dispatch(action);
             } else {
                 alert(res.data.msg)

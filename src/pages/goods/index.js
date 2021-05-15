@@ -8,16 +8,26 @@ import {
     Button,
     TopContainer,
     ShowContainer,
-    Table
+    Table,
+    BottomContainer,
+    PageButton
 } from './style'
 
 class Goods extends PureComponent {
-    componentWillMount() {
-        this.props.selectList();
+    
+    componentDidMount() {
+        this.props.selectList(this.props.pageNum, this.props.pageSize);
     }
 
+    totalShow(total) {
+        return(
+            <p className="total-show">合计：{total} 条</p>
+        )
+    }
+    
     render() {
-        
+        const {pageNum, total,pageSize,handleLastPage,handleNextPage, isLastPage} = this.props;
+       
         return (
             <Container>
                 <TopContainer>
@@ -44,9 +54,9 @@ class Goods extends PureComponent {
                         <td>创建时间</td>
                         </tr>
                            {
-                               this.props.list.map((item, index) => {
+                               this.props.list.map((item) => {
                                 return (
-                                    <tr>
+                                    <tr key={item.goodsId}>
                                         <td>{item.goodsId}</td>
                                         <td>{item.goodsName}</td>
                                         <td>{item.goodsIntro}</td>
@@ -63,19 +73,42 @@ class Goods extends PureComponent {
                            }    
                         </tbody>
                     </Table>
-
+                    <BottomContainer>
+                    {this.totalShow(total)}
+                    <PageButton className="last-page" onClick={()=>{handleLastPage(pageNum)}}>⬅️</PageButton>
+                    <p>第{pageNum}页</p>
+                    <PageButton onClick = {()=>handleNextPage(pageNum, isLastPage, pageSize)}>➡️</PageButton>
+                    </BottomContainer>
                 </ShowContainer>
+          
             </Container>  
         )
     }
 }
 
 const mapState = (state) => ({
-    list : state.goods.get("list")
+    list : state.goods.get("list"),
+    pageNum: state.goods.get("pageNum"),
+    pageSize: state.goods.get("pageSize"),
+    total: state.goods.get("total"),
+    isLastPage:state.goods.get("isLastPage")
 });
 const mapDispatch = (dispatch) => ({
-    selectList() {
-        const action = getList();
+    handleLastPage(pageNum) {
+        if (pageNum > 1) {
+            const action = getList(pageNum-1, "5");
+            dispatch(action);
+        }
+    },
+    handleNextPage(pageNum, isLastPage, pageSize) {
+
+       if (!isLastPage) {
+        const action = getList(pageNum+1, pageSize);
+        dispatch(action);
+       }
+    },
+    selectList(pageNum, pageSize) {
+        const action = getList(pageNum, pageSize);
         dispatch(action);
     }
 })

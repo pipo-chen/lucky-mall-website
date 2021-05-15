@@ -12,6 +12,13 @@ width: 100%;
 height:100%;
 background-color:#F7F8FA;
 margin: 0px;
+p {
+    font-size: 14px;
+font-family: PingFangSC-Regular, PingFang SC;
+font-weight: 400;
+color: rgba(25, 31, 37, 0.5);
+line-height: 22px;
+}
 `
 
 export const TopContainer = styled.div`
@@ -26,22 +33,45 @@ p {
     line-height: 40px;
     margin-left:30px;
 }
-box-shadow: 0px 4px 0px 0px #1890FF;
+box-shadow: 0px 1px 0px 0px #1890FF;
 `
 
 export const OperateContainer = styled.div`
 width:100%;
 margin: 25px 0;
-/* border-bottom: 1px solid #f0f0f0; */
 `
 export const ShowContainer = styled.div`
 width: 96%;
 margin-left:2%;
 background-color: white;
+padding-top:50px;
+
 `
+
+export const BottomContainer = styled.div`
+width: 96%;
+margin-left:2%;
+margin-top:100px;
+p {
+    display: inline-block;
+}
+
+`
+export const PageButton = styled.button`
+width: 30px;
+height: 30px;
+border-radius: 4px;
+border: 1px solid #C0C4CC;
+background: #FFFFFF;
+&p {
+    color: red;
+}
+&.last-page {
+    margin-left:40%;
+}
+`
+
 export const Table = styled.table`
-position:relative;
-top:50px;
 width: 90%;
 margin-left:5%;
 border-spacing: 0;
@@ -107,4 +137,5 @@ background-size: 22px auto;
     background-color: red;
 }
 `
+
 
