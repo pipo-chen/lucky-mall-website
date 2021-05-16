@@ -9,10 +9,8 @@ import DataIcon from '../../assert/images/RectangleCopy.png'
 export const Container = styled.div`
 width:100%;
 height:100%;
-position: absolute;
 background-color:white;
-top: 0;
-left: 0;
+position:absolute;
 `
 export const TopContainer = styled.div`
 height: 56px;
@@ -43,7 +41,6 @@ top:0;
 left:0;
 height:100%;
 width: 15%;
-padding-top:40px;
 background:#1E2E3D;
 box-shadow: 0px 1px 0px 0px #E5E5EA;
 `

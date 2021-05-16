@@ -1,27 +1,36 @@
 import axios from 'axios'
 import * as constants from './constants'
+import qs from 'qs';
 
-const changeData = (data) => ({
-    type: constants.CHANGE_DATA,
-    data: data
-})
+export const changeAddStatue = (res) => ({
+    type: constants.ADD_GOODS,
+    data: res
+});
 
-export const getList = (pageNum, pageSize) => {
+export const addGoodsInfo = (goodsName, goodsIntro, goodsCoverImg,goodsCarousel, goodsDetailContent, originalPrice,sellingPrice,stockNum,tag) => {
     return(dispatch) => {
-        console.log(pageNum, pageSize)
-        const f = new FormData()
-        f.append('pageNum',pageNum)
-        f.append('pageSize',pageSize)
-        
-        axios.post('/goods/list.do',f).then((res)=>{
+    
+        const formdata = new FormData();
+        formdata.append('goodsName',goodsName);
+        formdata.append('goodsIntro',goodsIntro);
+        formdata.append('goodsCategoryId',"1");
+        formdata.append('goodsCoverImg',goodsCoverImg);
+        formdata.append('goodsCarousel',goodsCarousel);
+        formdata.append('goodsDetailContent',goodsDetailContent);
+        formdata.append('originalPrice',originalPrice);
+        formdata.append('sellingPrice',sellingPrice);
+        formdata.append('stockNum',stockNum);
+        formdata.append('tag',tag);
+        formdata.append("goodsSellStatus", "0");
+        formdata.append("createUser", "0");
+
+        axios.post("/goods/add.do", formdata).then (res=>{
+            alert(res.data.msg);
             if (res.data.status == 0) {
-                console.log(res.data.msg);
-                const action = changeData(res.data.data);
+                const action = changeAddStatue(false);
                 dispatch(action);
-            } else {
-                alert(res.data.msg)
             }
-        });
+        })
         
     }
 }

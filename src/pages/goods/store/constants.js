@@ -1,1 +1,1 @@
-export const CHANGE_DATA = 'goods/change_data';
+export const ADD_GOODS = 'goods/add';

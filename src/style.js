@@ -48,7 +48,7 @@ createGlobalStyle`
 `
 export const Container = styled.div`
 position: absolute;
-background-color: green;
+background-color: 1E2E3D;
 width: 100%;
 height: 100%;
 `
