@@ -49,7 +49,7 @@ class GoodsList extends PureComponent {
                                 </td>
                                 <td>{item.stockNum}</td>
                                 <td>{item.sellingPrice}</td>
-                                <td>{item.goodsSellStatus}</td>
+                                <td>{item.goodsSellStatus == 0? "上架":"下架"}</td>
                                 <td>{moment(item.createTime).format('YYYY-MM-DD')}</td>
                             </tr>
                         )
@@ -59,9 +59,9 @@ class GoodsList extends PureComponent {
             </Table>
             <BottomContainer>
             {this.totalShow(total)}
-            <PageButton className="last-page" onClick={()=>{handleLastPage(pageNum)}}>⬅️</PageButton>
+            <PageButton className="last-page" onClick={()=>{handleLastPage(pageNum)}}></PageButton>
             <p>第{pageNum}页</p>
-            <PageButton onClick = {()=>handleNextPage(pageNum, isLastPage, pageSize)}>➡️</PageButton>
+            <PageButton onClick = {()=>handleNextPage(pageNum, isLastPage, pageSize)}></PageButton>
             </BottomContainer>
         </ShowContainer>
         ) 

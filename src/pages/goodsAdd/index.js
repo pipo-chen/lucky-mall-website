@@ -6,10 +6,14 @@ import {
     Table,
     SelectButton
 } from './style'
-import {changeAddStatue, addGoodsInfo} from '../goods/store/actionCreators'
+import {changeAddStatue, addGoodsInfo, getCategoryList} from '../goods/store/actionCreators'
 
 class GoodsAdd extends PureComponent {
-   
+
+    componentDidMount() {
+        this.props.getCategoryList();
+    }
+    
     render() {
         
         return (
@@ -31,11 +35,14 @@ class GoodsAdd extends PureComponent {
                     <tr>
                         <td className="title">商品分类</td>
                         <td>
-                            <select>
-                                <option value="electric">家用电器</option>
-                                <option value="cooking">厨房</option>
-                                <option value="clothes">服装</option>
-                                <option value="shoes">鞋子</option>
+                            <select  ref={(select) => {this.categoryId = select}}>
+                            {this.props.options.map((item) => {
+                                return (
+                                    <option key={item.categoryId} value={item.categoryId}>{item.categoryName}</option>
+                                )}
+                                )
+                            }
+                        
                             </select>
                         </td>
                     </tr>
@@ -85,7 +92,7 @@ class GoodsAdd extends PureComponent {
                         <td></td>
                         <td>
                         <SelectButton>取消</SelectButton>
-                        <SelectButton className="save" onClick={()=>this.props.addGoods(this.goodsName, this.goodsIntro, this.goodsCoverImg, this.goodsCarousel, this.goodsDetailContent, this.originalPrice, this.sellingPrice, this.stockNum, this.tag)}>确定</SelectButton>
+                        <SelectButton className="save" onClick={()=>this.props.addGoods(this.categoryId, this.goodsName, this.goodsIntro, this.goodsCoverImg, this.goodsCarousel, this.goodsDetailContent, this.originalPrice, this.sellingPrice, this.stockNum, this.tag)}>确定</SelectButton>
                         </td>
                     </tr>
                     </tbody>
@@ -95,16 +102,25 @@ class GoodsAdd extends PureComponent {
         )
     }
 }
+
+const mapState = (state) => ({
+    options : state.goods.get("options")
+});
+
 const mapDispatch = (dispatch) => ({
     handleBackClick() {
         const action = changeAddStatue(false);
         dispatch(action);
     },
-    addGoods(goodsNameElem, goodsIntroElem, goodsCoverImgElem,goodsCarouselElem, goodsDetailContentElem, originalPriceElem, sellingPriceElem, stockNumElem, tagElem) {
-        const action = addGoodsInfo(goodsNameElem.value, goodsIntroElem.value,goodsCoverImgElem.value,goodsCarouselElem.value,goodsDetailContentElem.value,originalPriceElem.value,sellingPriceElem.value,stockNumElem.value,tagElem.value);
+    addGoods(categoryIdElem,goodsNameElem, goodsIntroElem, goodsCoverImgElem,goodsCarouselElem, goodsDetailContentElem, originalPriceElem, sellingPriceElem, stockNumElem, tagElem) {
+        const action = addGoodsInfo(categoryIdElem.value, goodsNameElem.value, goodsIntroElem.value,goodsCoverImgElem.value,goodsCarouselElem.value,goodsDetailContentElem.value,originalPriceElem.value,sellingPriceElem.value,stockNumElem.value,tagElem.value);
         dispatch(action);
+    },
+    getCategoryList() {
+        const action = getCategoryList();
+        dispatch(action)
     }
 
 });
 
-export default connect(null, mapDispatch)(GoodsAdd);
+export default connect(mapState, mapDispatch)(GoodsAdd);

@@ -31,7 +31,6 @@ p {
     line-height: 40px;
     margin-left:30px;
 }
-box-shadow: 0px 1px 0px 0px #1890FF;
 `
 
 export const OperateContainer = styled.div`
@@ -43,7 +42,7 @@ export const Button = styled.div`
 
 width: 120px;
 display: inline-block;
-margin: 0px 20px;
+margin: 0px 2%;
 height: 48px;
 line-height: 48px;
 text-align:center;
@@ -52,7 +51,7 @@ color: white;
 padding-left:10px;
 
 background-repeat:no-repeat;
-background-position:20px 13px;
+background-position:10px 13px;
 background-size: 22px auto;
 
 &.sold-out-goods {

@@ -1,4 +1,6 @@
 import styled  from 'styled-components'
+import LastIcon from '../../assert/images/shangyiye.png'
+import NextIcon from '../../assert/images/xiayiye.png'
 
 export const ShowContainer = styled.div`
 width: 96%;
@@ -24,10 +26,12 @@ text-align:center;
 }
 tr {
     border-bottom: 1px solid red;
+    
 }
 td {
     width:200px;
     font-size: 14px;
+    height: 60px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: rgba(25, 31, 37, 0.75);
@@ -54,11 +58,17 @@ width: 30px;
 height: 30px;
 border-radius: 4px;
 border: 1px solid #C0C4CC;
-background: #FFFFFF;
+background-color: white;
+background-repeat:no-repeat;
+background-position:0;
+background-size: 20px 20px;
+background-image:url(${NextIcon});
+margin: 0px 30px;
 &p {
     color: red;
 }
 &.last-page {
     margin-left:40%;
+    background-image:url(${LastIcon});
 }
 `

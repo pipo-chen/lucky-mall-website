@@ -1,19 +1,38 @@
 import axios from 'axios'
 import * as constants from './constants'
-import qs from 'qs';
 
 export const changeAddStatue = (res) => ({
     type: constants.ADD_GOODS,
     data: res
 });
 
-export const addGoodsInfo = (goodsName, goodsIntro, goodsCoverImg,goodsCarousel, goodsDetailContent, originalPrice,sellingPrice,stockNum,tag) => {
+const changeOptionList = (options) => ({
+    type: constants.CHANGE_OPTION,
+    options: options
+});
+
+export const getCategoryList = () => {
+    return(dispatch) => {
+
+        axios.get('/category/get_basic_category.do').then((res)=>{
+            if (res.data.status == 0) {
+                console.log(res.data.msg);
+                const action = changeOptionList(res.data.data);
+                dispatch(action);
+            } else {
+                alert(res.data.msg)
+            }
+        });
+    }
+}
+
+export const addGoodsInfo = (categoryId,goodsName, goodsIntro, goodsCoverImg,goodsCarousel, goodsDetailContent, originalPrice,sellingPrice,stockNum,tag) => {
     return(dispatch) => {
     
         const formdata = new FormData();
         formdata.append('goodsName',goodsName);
         formdata.append('goodsIntro',goodsIntro);
-        formdata.append('goodsCategoryId',"1");
+        formdata.append('goodsCategoryId',categoryId);
         formdata.append('goodsCoverImg',goodsCoverImg);
         formdata.append('goodsCarousel',goodsCarousel);
         formdata.append('goodsDetailContent',goodsDetailContent);
