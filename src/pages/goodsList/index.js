@@ -1,14 +1,14 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
-import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment'
 import {
     ShowContainer,
     Table,
     BottomContainer,
-    PageButton
+    PageButton,
+    CheckButton
 } from './style'
-import { getList } from './store/actionCreators'
+import { getList, selectAllOrNot, selectGoodsId } from './store/actionCreators'
 
 class GoodsList extends PureComponent {
     componentDidMount() {
@@ -20,14 +20,16 @@ class GoodsList extends PureComponent {
             <p className="total-show">合计：{total} 条</p>
         )
     }
+
     render() {
-        const {pageNum, total,pageSize,handleLastPage,handleNextPage, isLastPage} = this.props;
+        const {select, isSelectAll, pageNum, total,pageSize,handleLastPage,handleNextPage, isLastPage,changeSelect} = this.props;
        
         return(
             <ShowContainer>
             <Table>
                 <tbody>
                 <tr className="table-head">
+                <td><CheckButton className={isSelectAll ? "selected" :""} value={isSelectAll ? "1" : "0"}  onClick={(e)=>changeSelect(e)} ></CheckButton></td>
                 <td>商品编号</td>
                 <td>名称</td>
                 <td>商品简介</td>
@@ -36,11 +38,20 @@ class GoodsList extends PureComponent {
                 <td>商品售价</td>
                 <td>上架状态</td>
                 <td>创建时间</td>
+                
                 </tr>
                    {
-                       this.props.list.map((item) => {
+                       this.props.select.map((item) => {
                         return (
                             <tr key={item.goodsId}>
+                                <td>
+                                    <CheckButton 
+                                    value={item.goodsId} 
+                                    onClick={(e) => {changeSelect(e)}}
+                                    // 这里每次调用传递的 都是首项
+                                    className= {item.isSelect ? "selected" :''}
+                                    />
+                                </td>
                                 <td>{item.goodsId}</td>
                                 <td>{item.goodsName}</td>
                                 <td>{item.goodsIntro}</td>
@@ -74,7 +85,9 @@ const mapState = (state) => ({
     pageNum: state.goodsInfo.get("pageNum"),
     pageSize: state.goodsInfo.get("pageSize"),
     total: state.goodsInfo.get("total"),
-    isLastPage:state.goodsInfo.get("isLastPage")
+    isLastPage:state.goodsInfo.get("isLastPage"),
+    isSelectAll: state.goodsInfo.get("isSelectAll"),
+    select:state.goodsInfo.get("select")
 });
 
 const mapDispatch = (dispatch) => ({
@@ -94,6 +107,23 @@ const mapDispatch = (dispatch) => ({
     selectList(pageNum, pageSize) {
         const action = getList(pageNum, pageSize);
         dispatch(action);
+    },
+    changeSelect(e) {
+       
+        if (e.target.value === '1') {
+            //更改全选或不全选的状态
+            const action = selectAllOrNot(false);
+            dispatch(action);
+        }
+        else if (e.target.value === '0') {
+            const action = selectAllOrNot(true);
+            dispatch(action);
+        } else {
+            console.log("传递-->",e.target.value);
+            const action = selectGoodsId(e.target.value);
+            dispatch(action);
+        }
+        
     }
 })
 export default connect(mapState, mapDispatch)(GoodsList);

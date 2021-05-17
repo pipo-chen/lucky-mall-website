@@ -26,9 +26,9 @@ export const getCategoryList = () => {
     }
 }
 
-export const addGoodsInfo = (categoryId,goodsName, goodsIntro, goodsCoverImg,goodsCarousel, goodsDetailContent, originalPrice,sellingPrice,stockNum,tag) => {
+export const addGoodsInfo = (goodsSellStatus,categoryId,goodsName, goodsIntro, goodsCoverImg,goodsCarousel, goodsDetailContent, originalPrice,sellingPrice,stockNum,tag) => {
     return(dispatch) => {
-    
+     
         const formdata = new FormData();
         formdata.append('goodsName',goodsName);
         formdata.append('goodsIntro',goodsIntro);
@@ -40,7 +40,7 @@ export const addGoodsInfo = (categoryId,goodsName, goodsIntro, goodsCoverImg,goo
         formdata.append('sellingPrice',sellingPrice);
         formdata.append('stockNum',stockNum);
         formdata.append('tag',tag);
-        formdata.append("goodsSellStatus", "0");
+        formdata.append("goodsSellStatus", goodsSellStatus);
         formdata.append("createUser", "0");
 
         axios.post("/goods/add.do", formdata).then (res=>{

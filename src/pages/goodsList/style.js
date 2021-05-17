@@ -1,6 +1,8 @@
 import styled  from 'styled-components'
 import LastIcon from '../../assert/images/shangyiye.png'
 import NextIcon from '../../assert/images/xiayiye.png'
+import SelectIcon from '../../assert/images/select.png'
+import NoSelectIcon from '../../assert/images/no-select.png'
 
 export const ShowContainer = styled.div`
 width: 96%;
@@ -71,4 +73,17 @@ margin: 0px 30px;
     margin-left:40%;
     background-image:url(${LastIcon});
 }
+`
+
+export const CheckButton = styled.button`
+width: 20px;
+height: 20px;
+border-width: 0px;
+background-image: url(${NoSelectIcon});
+background-size: 100%;
+background-color:white;
+&.selected {
+    background-image: url(${SelectIcon});
+}
+
 `

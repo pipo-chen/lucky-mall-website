@@ -20,7 +20,7 @@ class Home extends PureComponent {
             return (
                 <Container>
                     <TopContainer>
-                        <p>群组管理</p>
+                        <p>商品模块</p>
                     </TopContainer>
                     <LfetContainer>
                         <HeadDiv>

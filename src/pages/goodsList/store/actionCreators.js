@@ -4,7 +4,17 @@ import * as constants from './constants'
 const changeData = (data) => ({
     type: constants.CHANGE_DATA,
     data: data
-})
+});
+
+export const selectAllOrNot = (isSelectAll) => ({
+    type: constants.SELECT_ALL,
+    isSelectAll : isSelectAll
+});
+
+export const selectGoodsId = (goodsId) => ({
+    type: constants.SELECT_GOODSID,
+    goodsId : goodsId
+});
 
 export const getList = (pageNum, pageSize) => {
     return(dispatch) => {

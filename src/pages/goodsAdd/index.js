@@ -54,9 +54,9 @@ class GoodsAdd extends PureComponent {
                         <td className="title">商品状态</td>
 
                         <td>
-                            <select>
-                                <option value="arrive">上架</option>
-                                <option value="onsale">下架</option>
+                            <select ref={(select) => {this.goodsSellStatus = select}}>
+                                <option value="0">上架</option>
+                                <option value="1">下架</option>
                             </select>
                         </td>
                     </tr>
@@ -92,7 +92,7 @@ class GoodsAdd extends PureComponent {
                         <td></td>
                         <td>
                         <SelectButton>取消</SelectButton>
-                        <SelectButton className="save" onClick={()=>this.props.addGoods(this.categoryId, this.goodsName, this.goodsIntro, this.goodsCoverImg, this.goodsCarousel, this.goodsDetailContent, this.originalPrice, this.sellingPrice, this.stockNum, this.tag)}>确定</SelectButton>
+                        <SelectButton className="save" onClick={()=>this.props.addGoods(this.goodsSellStatus, this.categoryId, this.goodsName, this.goodsIntro, this.goodsCoverImg, this.goodsCarousel, this.goodsDetailContent, this.originalPrice, this.sellingPrice, this.stockNum, this.tag)}>确定</SelectButton>
                         </td>
                     </tr>
                     </tbody>
@@ -112,8 +112,8 @@ const mapDispatch = (dispatch) => ({
         const action = changeAddStatue(false);
         dispatch(action);
     },
-    addGoods(categoryIdElem,goodsNameElem, goodsIntroElem, goodsCoverImgElem,goodsCarouselElem, goodsDetailContentElem, originalPriceElem, sellingPriceElem, stockNumElem, tagElem) {
-        const action = addGoodsInfo(categoryIdElem.value, goodsNameElem.value, goodsIntroElem.value,goodsCoverImgElem.value,goodsCarouselElem.value,goodsDetailContentElem.value,originalPriceElem.value,sellingPriceElem.value,stockNumElem.value,tagElem.value);
+    addGoods(goodsSellStatusElem, categoryIdElem,goodsNameElem, goodsIntroElem, goodsCoverImgElem,goodsCarouselElem, goodsDetailContentElem, originalPriceElem, sellingPriceElem, stockNumElem, tagElem) {
+        const action = addGoodsInfo(goodsSellStatusElem.value, categoryIdElem.value, goodsNameElem.value, goodsIntroElem.value,goodsCoverImgElem.value,goodsCarouselElem.value,goodsDetailContentElem.value,originalPriceElem.value,sellingPriceElem.value,stockNumElem.value,tagElem.value);
         dispatch(action);
     },
     getCategoryList() {
