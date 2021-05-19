@@ -13,7 +13,6 @@ import {
 } from './style'
 import {handleMouseEnter,handleMouseLeave} from './store/actionCreators'
 import Goods from '../goods/index'
-import Order from '../order'
 
 class Home extends PureComponent {
     render() {    

@@ -14,8 +14,8 @@ export const loginApp = (account, password) => {
         
         console.log(account, password, f);
         axios.post('/admin/login.do',f).then((res)=>{
+            alert(res.data.msg);
             if (res.data.status == 0) {
-                console.log(res.data.msg);
                 const action = changeLogin(true);
                 dispatch(action);
             } else {
