@@ -46,5 +46,17 @@ export default(state = fromJS({list: [],select: [], isSelectAll: false, pageNum:
         }
         return state.set("select", [...newSelect]);
     }
+    if (action.type === constants.CHANGE_INFO) {
+
+        const newSelect = [...state.get("list")];
+        for (const map of newSelect) {
+            if (map.goodsId == action.info.goodsId) {
+                map.goodsSellStatus = action.info.goodsSellStatus;
+            }
+        }
+        return state.set("list", [...newSelect]);
+
+    } 
+
     return state;
 }

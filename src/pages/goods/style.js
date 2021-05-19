@@ -34,8 +34,11 @@ p {
 `
 
 export const OperateContainer = styled.div`
-width:100%;
-margin: 25px 0;
+width:96%;
+padding-top: 25px;
+margin-top: 20px;
+background-color: white;
+margin-left: 2%;
 `
 
 export const Button = styled.div`

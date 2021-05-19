@@ -11,29 +11,33 @@ import {
 } from './style'
 import GoodsList from '../goodsList'
 import GoodsAdd from '../goodsAdd'
-import { changeAddStatue } from './store/actionCreators'
+import { changeAddState} from './store/actionCreators'
+import { changeSoldState } from '../goodsList/store/actionCreators'
 
 class Goods extends PureComponent {
-   
-    changShowContainer() {
-        if (!this.props.isAdd) {
-            return (
-                <div>
-                <OperateContainer>
-                <Button onClick={()=>this.props.handleAddClick(this.props.isAdd)} className="add-goods">添加商品</Button>
-                <Button className="change-goods">修改商品</Button>
-                <Button className="arrive-goods">上架商品</Button>
-                <Button className="sold-out-goods">下架商品</Button>
-                </OperateContainer>
-                <GoodsList/>
-                </div>
-            )
-        } else {
-            return(
+  
+    showEdit() {
+        console.log(".....加载edit")
+        return(
             <GoodsAdd/>
             )
-        }
     }
+    showList() {
+        console.log(".....加载list")
+        return (
+
+            <div>
+            <OperateContainer>
+            <Button onClick={()=>this.props.handleAddClick(this.props.isAdd)} className="add-goods">添加商品</Button>
+            <Button className="change-goods">修改商品</Button>
+            <Button onClick={()=>this.props.handleSoldStateClick("arrive", this.props.select)} className="arrive-goods">上架商品</Button>
+            <Button onClick={()=>this.props.handleSoldStateClick("soldout", this.props.select)} className="sold-out-goods">下架商品</Button>
+            </OperateContainer>
+            <GoodsList/>
+            </div>
+        )
+    }
+
     render() {
        
         return (
@@ -42,22 +46,31 @@ class Goods extends PureComponent {
                 <TopContainer>
                     <p>商品管理</p>
                 </TopContainer>
-                
-                {this.changShowContainer()}
+                {!(this.props.isModify || this.props.isAdd)?this.showList():this.showEdit()}
             </Container>  
         )
     }
 }
 const mapState = (state) => ({
-    isAdd : state.goods.get("isAdd")
+    isAdd : state.goods.get("isAdd"),
+    select: state.goodsInfo.get("select"),
+    isModify: state.goods.get("isModify")
 });
 
 const mapDispatch = (dispatch) => ({
     handleAddClick(isAdd) {
-
-        const action = changeAddStatue(true);
+        const action = changeAddState(true);
         dispatch(action);
-        
+    },
+    handleSoldStateClick(state, list) {
+        if (list != null) {
+            for (const item of list) {
+                if (item["isSelect"]) {
+                    const action = changeSoldState(state, item);
+                    dispatch(action);
+                }
+            }
+        }
     }
 
 });

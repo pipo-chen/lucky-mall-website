@@ -8,7 +8,14 @@ import {
     PageButton,
     CheckButton
 } from './style'
-import { getList, selectAllOrNot, selectGoodsId } from './store/actionCreators'
+import { getList, selectAllOrNot, selectGoodsId, deleteItem} from './store/actionCreators'
+import * as constants from './store/constants'
+import {modifyInfo} from '../goods/store/actionCreators'
+
+const changeData = (data) => ({
+    type: constants.CHANGE_DATA,
+    data: data
+})
 
 class GoodsList extends PureComponent {
     componentDidMount() {
@@ -22,7 +29,7 @@ class GoodsList extends PureComponent {
     }
 
     render() {
-        const {select, isSelectAll, pageNum, total,pageSize,handleLastPage,handleNextPage, isLastPage,changeSelect} = this.props;
+        const {isSelectAll, pageNum, total,pageSize,handleLastPage,handleNextPage, isLastPage,changeSelect,handleModifyInfoClick,handleDeleteClick} = this.props;
        
         return(
             <ShowContainer>
@@ -38,6 +45,7 @@ class GoodsList extends PureComponent {
                 <td>商品售价</td>
                 <td>上架状态</td>
                 <td>创建时间</td>
+                <td>操作</td>
                 
                 </tr>
                    {
@@ -48,7 +56,6 @@ class GoodsList extends PureComponent {
                                     <CheckButton 
                                     value={item.goodsId} 
                                     onClick={(e) => {changeSelect(e)}}
-                                    // 这里每次调用传递的 都是首项
                                     className= {item.isSelect ? "selected" :''}
                                     />
                                 </td>
@@ -62,6 +69,7 @@ class GoodsList extends PureComponent {
                                 <td>{item.sellingPrice}</td>
                                 <td>{item.goodsSellStatus == 0? "上架":"下架"}</td>
                                 <td>{moment(item.createTime).format('YYYY-MM-DD')}</td>
+                                <td><button onClick={()=>handleModifyInfoClick(item)}>修改</button><button onClick={()=>handleDeleteClick(item)}>删除</button></td>
                             </tr>
                         )
                      })
@@ -111,7 +119,6 @@ const mapDispatch = (dispatch) => ({
     changeSelect(e) {
        
         if (e.target.value === '1') {
-            //更改全选或不全选的状态
             const action = selectAllOrNot(false);
             dispatch(action);
         }
@@ -119,11 +126,19 @@ const mapDispatch = (dispatch) => ({
             const action = selectAllOrNot(true);
             dispatch(action);
         } else {
-            console.log("传递-->",e.target.value);
             const action = selectGoodsId(e.target.value);
             dispatch(action);
         }
-        
+    },
+    handleModifyInfoClick(item) {
+        //传递进入添加商品页 并带值
+        const action = modifyInfo(item);
+        dispatch(action);
+
+    },
+    handleDeleteClick(item) {
+        const action = deleteItem(item);
+        dispatch(action);
     }
 })
 export default connect(mapState, mapDispatch)(GoodsList);
