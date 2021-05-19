@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
-import { Redirect, Link, Route} from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import {
     Container,
     LfetContainer,
@@ -11,17 +11,15 @@ import {
     TopContainer,
     RightContainer
 } from './style'
-import {handleMouseEnter,handleMouseLeave} from './store/actionCreators'
 import Goods from '../goods/index'
-import Order from '../order'
 
-class Home extends PureComponent {
+class User extends PureComponent {
     render() {    
         if (this.props.login) {
             return (
                 <Container>
                     <TopContainer>
-                        <p>商品模块</p>
+                        <p>用户模块</p>
                     </TopContainer>
                     <LfetContainer>
                         <HeadDiv>
@@ -37,7 +35,7 @@ class Home extends PureComponent {
                         </LeftNav>
                     </LfetContainer>
                     <RightContainer>
-                        <Goods/>
+                        
                     </RightContainer>
                 </Container>
             )
@@ -48,19 +46,7 @@ class Home extends PureComponent {
 }
 
 const mapState = (state) => ({
-    login : state.login.get("login"),
-    mouse : state.home.get("mouse")
+    login : state.login.get("login")
 });
 
-const mapDispatch = (dispatch) => ({
-    handleMouseEnter() {
-        const action = handleMouseEnter();
-        dispatch(action);
-    },
-    handleMouseLeave() {
-        const action = handleMouseLeave();
-        dispatch(action);
-    }
-
-})
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, null)(User);

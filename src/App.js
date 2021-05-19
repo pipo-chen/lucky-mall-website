@@ -2,6 +2,8 @@ import Header from './pages/header/index'
 import Login from './pages/login'
 import Register from './pages/register'
 import Home from './pages/home'
+import Order from './pages/order'
+import User from './pages/user'
 import { Provider } from 'react-redux'
 import store from './store/index'
 import {BrowserRouter, Route} from 'react-router-dom'
@@ -17,6 +19,8 @@ function App() {
         <Route path='/'  exact component={Login}></Route>
         <Route path='/register' exact component={Register}></Route>
         <Route path = '/home' exact component = {Home}></Route>
+        <Route path ='/order' exact component = {Order}></Route>
+        <Route path ='/user' exact component = {User}></Route>
       </div>
       </BrowserRouter>
     </Provider>

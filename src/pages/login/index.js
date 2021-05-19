@@ -13,7 +13,7 @@ import {loginApp} from './store/actionCreators'
 
 class Login extends PureComponent {
     render() {  
-        if (!this.props.login) {
+        if (this.props.login) {
             return (
                 <Container>
                     <BGImg/>

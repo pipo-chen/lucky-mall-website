@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
-import { Redirect, Link, Route} from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import {
     Container,
     LfetContainer,
@@ -11,11 +11,8 @@ import {
     TopContainer,
     RightContainer
 } from './style'
-import {handleMouseEnter,handleMouseLeave} from './store/actionCreators'
-import Goods from '../goods/index'
-import Order from '../order'
 
-class Home extends PureComponent {
+class Order extends PureComponent {
     render() {    
         if (this.props.login) {
             return (
@@ -29,7 +26,7 @@ class Home extends PureComponent {
                             你好，mk
                         </HeadDiv>
                         <LeftNav>
-                            <Link to='/user'><LeftItem className='icon-user'>用户管理</LeftItem></Link>
+                            <LeftItem className='icon-user'>用户管理</LeftItem>
                             <Link to='/home'><LeftItem className='icon-goods'>商品管理</LeftItem></Link>
                             <Link to='/order'><LeftItem className='icon-order'>订单管理</LeftItem></Link>
                             <LeftItem className='icon-statistic'>数据统计</LeftItem>
@@ -37,7 +34,7 @@ class Home extends PureComponent {
                         </LeftNav>
                     </LfetContainer>
                     <RightContainer>
-                        <Goods/>
+                        这是一个订单页
                     </RightContainer>
                 </Container>
             )
@@ -49,18 +46,6 @@ class Home extends PureComponent {
 
 const mapState = (state) => ({
     login : state.login.get("login"),
-    mouse : state.home.get("mouse")
 });
 
-const mapDispatch = (dispatch) => ({
-    handleMouseEnter() {
-        const action = handleMouseEnter();
-        dispatch(action);
-    },
-    handleMouseLeave() {
-        const action = handleMouseLeave();
-        dispatch(action);
-    }
-
-})
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, null)(Order);
