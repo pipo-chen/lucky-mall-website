@@ -57,6 +57,15 @@ export default(state = fromJS({list: [],select: [], isSelectAll: false, pageNum:
         return state.set("list", [...newSelect]);
 
     } 
+    if (action.type === constants.DELETE_INFO) {
+        const newSelect = [...state.get("select")];
+        newSelect.map((item, index) => {
+            if (item.goodsId == action.info.goodsId) {
+                newSelect.splice(index, 1);
+            }
+        })
+        return state.set("select", [...newSelect]);
+    }
 
     return state;
 }

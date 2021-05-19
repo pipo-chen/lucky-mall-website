@@ -85,5 +85,12 @@ background-color:white;
 &.selected {
     background-image: url(${SelectIcon});
 }
-
+`
+export const PButton = styled.span`
+font-size: 14px;
+font-family: PingFangSC-Regular, PingFang SC;
+font-weight: 400;
+color: #1890FF;
+line-height: 20px;
+margin: 0 10px;
 `

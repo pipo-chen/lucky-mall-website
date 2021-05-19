@@ -6,7 +6,8 @@ import {
     Table,
     BottomContainer,
     PageButton,
-    CheckButton
+    CheckButton,
+    PButton
 } from './style'
 import { getList, selectAllOrNot, selectGoodsId, deleteItem} from './store/actionCreators'
 import * as constants from './store/constants'
@@ -69,7 +70,7 @@ class GoodsList extends PureComponent {
                                 <td>{item.sellingPrice}</td>
                                 <td>{item.goodsSellStatus == 0? "上架":"下架"}</td>
                                 <td>{moment(item.createTime).format('YYYY-MM-DD')}</td>
-                                <td><button onClick={()=>handleModifyInfoClick(item)}>修改</button><button onClick={()=>handleDeleteClick(item)}>删除</button></td>
+                                <td><PButton onClick={()=>handleModifyInfoClick(item)}>修改</PButton><PButton onClick={()=>handleDeleteClick(item)}>删除</PButton></td>
                             </tr>
                         )
                      })

@@ -16,24 +16,32 @@ export const selectGoodsId = (goodsId) => ({
     goodsId : goodsId
 });
 
-export const changeInfo = (info) => ({
+const changeInfo = (info) => ({
     type: constants.CHANGE_INFO,
     info : info
 });
 
+const deleteGoodsItem = (item) => ({
+    type: constants.DELETE_INFO,
+    info: item
+});
+
 export const deleteItem = (item) => {
     return(dispatch) => {
+        console.log("refresh")
         const formdata = new FormData();
         formdata.append('goodsId',item["goodsId"]);
         axios.post("/goods/delete.do", formdata).then (res=>{
             alert(res.data.msg);
             if (res.data.status == 0) {
-                const action = changeInfo(item);
+                //更新 select 数据 删除完之后 重新加载列表
+                const action = deleteGoodsItem(item);
                 dispatch(action)
             }
         })
     }
 }
+
 export const changeSoldState = (state, item) => {
     return(dispatch) => {
         const formdata = new FormData();
@@ -68,7 +76,9 @@ export const changeSoldState = (state, item) => {
 }
 // pageNum: "1", pageSize: "5"
 export const getList = (pageNum = "1", pageSize = "5") => {
+    
     return(dispatch) => {
+        console.log("refresh")
         const f = new FormData()
         f.append('pageNum',pageNum)
         f.append('pageSize',pageSize)

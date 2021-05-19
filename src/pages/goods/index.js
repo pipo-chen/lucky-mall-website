@@ -29,7 +29,6 @@ class Goods extends PureComponent {
             <div>
             <OperateContainer>
             <Button onClick={()=>this.props.handleAddClick(this.props.isAdd)} className="add-goods">添加商品</Button>
-            <Button className="change-goods">修改商品</Button>
             <Button onClick={()=>this.props.handleSoldStateClick("arrive", this.props.select)} className="arrive-goods">上架商品</Button>
             <Button onClick={()=>this.props.handleSoldStateClick("soldout", this.props.select)} className="sold-out-goods">下架商品</Button>
             </OperateContainer>

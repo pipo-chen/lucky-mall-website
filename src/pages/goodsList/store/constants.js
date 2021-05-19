@@ -5,3 +5,4 @@ export const CHANGE_SELL_STATE = "goods/sell_state";
 export const SOLD_OUT = "soldout";
 export const ARRIVE = "arrive";
 export const CHANGE_INFO = "goods/change_info";
+export const DELETE_INFO = 'goods/delete_info';
