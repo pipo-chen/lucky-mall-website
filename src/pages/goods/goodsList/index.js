@@ -11,7 +11,7 @@ import {
 } from './style'
 import { getList, selectAllOrNot, selectGoodsId, deleteItem} from './store/actionCreators'
 import * as constants from './store/constants'
-import {modifyInfo} from '../goods/store/actionCreators'
+import {modifyInfo} from '../../goods/store/actionCreators'
 
 const changeData = (data) => ({
     type: constants.CHANGE_DATA,

@@ -6,7 +6,7 @@ import {
     Table,
     SelectButton
 } from './style'
-import {addGoodsInfo, getCategoryList, updateGoodsInfo, changeAllState} from '../goods/store/actionCreators'
+import {addGoodsInfo, getCategoryList, updateGoodsInfo, changeAllState} from '../../goods/store/actionCreators'
 
 class GoodsAdd extends PureComponent {
 

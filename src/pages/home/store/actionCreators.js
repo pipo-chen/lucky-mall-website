@@ -9,3 +9,8 @@ export const handleMouseLeave = () => ({
     type: constants.MOUSE_LEAVE
 });
 
+export const handleSelectNavItem = (index) => ({
+    type: constants.SELECT_NAV,
+    index : index
+})
+

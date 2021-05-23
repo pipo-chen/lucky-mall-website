@@ -1,8 +1,8 @@
 import styled  from 'styled-components'
-import LastIcon from '../../assert/images/shangyiye.png'
-import NextIcon from '../../assert/images/xiayiye.png'
-import SelectIcon from '../../assert/images/select.png'
-import NoSelectIcon from '../../assert/images/no-select.png'
+import LastIcon from '../../../assert/images/shangyiye.png'
+import NextIcon from '../../../assert/images/xiayiye.png'
+import SelectIcon from '../../../assert/images/select.png'
+import NoSelectIcon from '../../../assert/images/no-select.png'
 
 export const ShowContainer = styled.div`
 width: 96%;

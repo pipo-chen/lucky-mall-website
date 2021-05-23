@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
-import { getList } from '../goodsList/store/actionCreators'
-import moment from 'moment'
+import { getList } from '../goods/goodsList/store/actionCreators'
 import {
     Container,
     OperateContainer,
@@ -9,21 +8,19 @@ import {
     TopContainer,
     ShowContainer
 } from './style'
-import GoodsList from '../goodsList'
-import GoodsAdd from '../goodsAdd'
+import GoodsList from '../goods/goodsList'
+import GoodsAdd from '../goods/goodsAdd'
 import { changeAddState} from './store/actionCreators'
-import { changeSoldState } from '../goodsList/store/actionCreators'
+import { changeSoldState } from '../goods/goodsList/store/actionCreators'
 
 class Goods extends PureComponent {
   
     showEdit() {
-        console.log(".....加载edit")
         return(
             <GoodsAdd/>
             )
     }
     showList() {
-        console.log(".....加载list")
         return (
 
             <div>

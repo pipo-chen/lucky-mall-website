@@ -11,16 +11,39 @@ import {
     TopContainer,
     RightContainer
 } from './style'
-import {handleMouseEnter,handleMouseLeave} from './store/actionCreators'
+import {handleMouseEnter,handleMouseLeave, handleSelectNavItem} from './store/actionCreators'
 import Goods from '../goods/index'
+import User from '../user'
+import Order from '../order'
 
 class Home extends PureComponent {
+    
+    selectNav(index) {
+        if (index === '1') {
+            return(<User/>)
+        } else if (index === '2') {
+            return(<Goods/>)
+        } else {
+            return(<Order/>)
+        }
+    }
+    selectNavTitle(index) {
+        if (index === '1') {
+            return(<p>用户管理</p>)
+        } else if (index === '2') {
+            return(<p>商品管理</p>)
+        } else {
+            return(<p>订单管理</p>)
+        }
+        
+    }
     render() {    
-        if (this.props.login) {
+        const {login,index,handleNavClick} = this.props;
+        if (login) {
             return (
                 <Container>
                     <TopContainer>
-                        <p>商品模块</p>
+                         {this.selectNavTitle(index)}
                     </TopContainer>
                     <LfetContainer>
                         <HeadDiv>
@@ -28,15 +51,15 @@ class Home extends PureComponent {
                             你好，mk
                         </HeadDiv>
                         <LeftNav>
-                            <Link to='/user'><LeftItem className='icon-user'>用户管理</LeftItem></Link>
-                            <Link to='/home'><LeftItem className='icon-goods'>商品管理</LeftItem></Link>
-                            <Link to='/order'><LeftItem className='icon-order'>订单管理</LeftItem></Link>
-                            <LeftItem className='icon-statistic'>数据统计</LeftItem>
-                            <LeftItem className='icon-analyse'>数据分析</LeftItem>
+                            <LeftItem className={index === '1' ? 'icon-user selected' : 'icon-user'}  onClick={()=>handleNavClick("1")} >用户管理</LeftItem>
+                            <LeftItem className={index === '2' ? 'icon-goods selected' : 'icon-goods'} onClick={()=>handleNavClick("2")}>商品管理</LeftItem>
+                            <LeftItem className={index === '3' ? 'icon-order selected' : 'icon-order'}  onClick={()=>handleNavClick("3")}>订单管理</LeftItem>
+                            <LeftItem className='icon-statistic' onClick={()=>handleNavClick("4")}>数据统计</LeftItem>
+                            <LeftItem className='icon-analyse' onClick={()=>handleNavClick("5")}>数据分析</LeftItem>
                         </LeftNav>
                     </LfetContainer>
                     <RightContainer>
-                        <Goods/>
+                       {this.selectNav(this.props.index)}
                     </RightContainer>
                 </Container>
             )
@@ -48,7 +71,8 @@ class Home extends PureComponent {
 
 const mapState = (state) => ({
     login : state.login.get("login"),
-    mouse : state.home.get("mouse")
+    mouse : state.home.get("mouse"),
+    index : state.home.get("index")
 });
 
 const mapDispatch = (dispatch) => ({
@@ -58,6 +82,10 @@ const mapDispatch = (dispatch) => ({
     },
     handleMouseLeave() {
         const action = handleMouseLeave();
+        dispatch(action);
+    },
+    handleNavClick(index) {
+        const action = handleSelectNavItem(index);
         dispatch(action);
     }
 

@@ -1,4 +1,3 @@
-import Header from './pages/header/index'
 import Login from './pages/login'
 import Register from './pages/register'
 import Home from './pages/home'
@@ -14,8 +13,7 @@ function App() {
     <Container>
     <Provider store = {store}>
       <BrowserRouter>
-      <div>
-        <Route path='/header' exact component={Header}></Route> 
+      <div> 
         <Route path='/'  exact component={Login}></Route>
         <Route path='/register' exact component={Register}></Route>
         <Route path = '/home' exact component = {Home}></Route>
