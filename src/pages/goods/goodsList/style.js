@@ -9,7 +9,6 @@ width: 96%;
 margin-left:2%;
 background-color: white;
 padding-top:50px;
-
 `
 
 export const Table = styled.table`
@@ -29,6 +28,7 @@ text-align:center;
 tr {
     border-bottom: 1px solid red;
     
+    
 }
 td {
     width:200px;
@@ -38,6 +38,11 @@ td {
     font-weight: 400;
     color: rgba(25, 31, 37, 0.75);
     border-bottom: 1px solid rgba(25, 31, 37, 0.08);;
+    &.circle {
+        background: red;
+        width:20px;
+        height: 20px;
+    }
 
 }
 td img {

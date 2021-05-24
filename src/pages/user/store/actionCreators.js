@@ -6,6 +6,41 @@ const changeData = (data) => ({
     data: data
 });
 
+export const lockedItem = (locked, userId) => {
+    return(dispatch) => {
+        const f = new FormData();
+        if (locked == 0) {
+            f.append("locked","1")
+        } else {
+            f.append("locked","0")
+        }
+        f.append('adminUserId',userId);
+        axios.post('/admin/changeLocked.do', f).then((res) => {
+            alert(res.data.msg);
+            if (res.data.status == 0) {
+                const action = getList();
+                dispatch(action);
+            } 
+        })
+    }
+}
+
+export const deleteItem = (userId) => {
+    return(dispatch) => {
+        
+        const f = new FormData()
+        f.append('adminUserId',userId)
+        
+        axios.post('/admin/delete.do',f).then((res)=>{
+            alert(res.data.msg)
+            if (res.data.status == 0) {
+                const action = getList();
+                dispatch(action);
+            } 
+        });
+    }
+}
+
 export const getList = (pageNum = "1", pageSize = "5") => {
     
     return(dispatch) => {
