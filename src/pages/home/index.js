@@ -15,6 +15,7 @@ import {handleMouseEnter,handleMouseLeave, handleSelectNavItem} from './store/ac
 import Goods from '../goods/index'
 import User from '../user'
 import Order from '../order'
+import Carousel from '../carousel'
 
 class Home extends PureComponent {
     
@@ -23,8 +24,10 @@ class Home extends PureComponent {
             return(<User/>)
         } else if (index === '2') {
             return(<Goods/>)
-        } else {
+        } else if (index === '3') {
             return(<Order/>)
+        } else {
+            return(<Carousel/>)
         }
     }
     selectNavTitle(index) {
@@ -32,8 +35,10 @@ class Home extends PureComponent {
             return(<p>用户管理</p>)
         } else if (index === '2') {
             return(<p>商品管理</p>)
-        } else {
+        } else if(index === '3'){
             return(<p>订单管理</p>)
+        } else {
+            return(<p>轮播图配置</p>)
         }
         
     }
@@ -54,8 +59,8 @@ class Home extends PureComponent {
                             <LeftItem className={index === '1' ? 'icon-user selected' : 'icon-user'}  onClick={()=>handleNavClick("1")} >用户管理</LeftItem>
                             <LeftItem className={index === '2' ? 'icon-goods selected' : 'icon-goods'} onClick={()=>handleNavClick("2")}>商品管理</LeftItem>
                             <LeftItem className={index === '3' ? 'icon-order selected' : 'icon-order'}  onClick={()=>handleNavClick("3")}>订单管理</LeftItem>
-                            <LeftItem className='icon-statistic' onClick={()=>handleNavClick("4")}>数据统计</LeftItem>
-                            <LeftItem className='icon-analyse' onClick={()=>handleNavClick("5")}>数据分析</LeftItem>
+                            <LeftItem className='icon-statistic' onClick={()=>handleNavClick("4")}>轮播图配置</LeftItem>
+                            <LeftItem className='icon-analyse' onClick={()=>handleNavClick("5")}>热销商品配置</LeftItem>
                         </LeftNav>
                     </LfetContainer>
                     <RightContainer>

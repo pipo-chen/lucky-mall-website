@@ -42,7 +42,7 @@ class User extends PureComponent {
                                 {
                                     this.props.list.map((item)=>{
                                         return (
-                                            <tr>
+                                            <tr key={item.adminUserId}>
                                                 <td>{item.adminUserId}</td>
                                                 <td>{item.loginUserName}</td>
                                                 <td>{item.nickName}</td>

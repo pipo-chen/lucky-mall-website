@@ -6,6 +6,7 @@ import HomeReducer from '../pages/home/store/reducer'
 import GoodsInfoReducer from '../pages/goods/goodsList/store/reducer'
 import GoodsListReducer from '../pages/goods/store/reducer'
 import UserReducer from '../pages/user/store/reducer'
+import CarouselReducer from '../pages/carousel/store/reducer'
 
 export default combineReducers({
     todo: TodoReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     home: HomeReducer,
     goodsInfo: GoodsInfoReducer,
     goods: GoodsListReducer,
-    user:UserReducer
+    user: UserReducer,
+    carousel: CarouselReducer
 });
