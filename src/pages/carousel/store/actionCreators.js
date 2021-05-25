@@ -12,6 +12,22 @@ export const updateItem = (item, isUpdate) => ({
     isUpdate : isUpdate
 })
 
+export const insertCarouselInfo = (carouselUrl, redirectUrl, carouselRank) => {
+    return(dispatch) => {
+        const f = new FormData();
+        f.append('carouselUrl', carouselUrl);
+        f.append('redirectUrl', redirectUrl);
+        f.append('carouselRank', carouselRank);
+        axios.post('carousel/add.do', f).then((res) => {
+            alert(res.data.msg);
+            if (res.data.status == 0) {
+                const action = getList();
+                dispatch(action);
+            }
+        })
+    }
+}
+
 export const updateCarouselInfo = (carouselId, carouselUrl, redirectUrl, carouselRank)=> {
     return(dispatch) => {
         const f = new FormData();

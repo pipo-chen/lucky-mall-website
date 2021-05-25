@@ -38,7 +38,7 @@ class Carousel extends PureComponent {
                     <p>轮播图配置</p>
                 </TopContainer>
                 <OperateContainer>
-                    <Button className="add-goods">创建轮播图</Button>
+                    <Button onClick={()=>{handleUpdeteItem(null)}} className="add-goods">创建轮播</Button>
                 </OperateContainer>
                 {this.updateView()}
                 <ShowContainer>
