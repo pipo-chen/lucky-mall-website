@@ -45,6 +45,7 @@ background:#1E2E3D;
 box-shadow: 0px 1px 0px 0px #E5E5EA;
 `
 export const HeadDiv = styled.div`
+padding-top: 40px;
 position: relative;
 width: 100%;
 color:white;
@@ -61,6 +62,18 @@ width:56px;
 height: 56px;
 background: url(${HeadIcon});
 background-size: contain;
+border-radius: 50%;
+`
+
+export const InfoUl = styled.ul`
+width: 40%;
+margin:  10px auto;
+text-align: left;
+height: 50px;
+background-color: gray;
+li {
+    list-style: none;
+}
 `
 
 export const LeftNav = styled.ul`

@@ -9,13 +9,15 @@ import {
     HeadLogo,
     HeadDiv,
     TopContainer,
-    RightContainer
+    RightContainer,
+    InfoUl
 } from './style'
 import {handleMouseEnter,handleMouseLeave, handleSelectNavItem} from './store/actionCreators'
 import Goods from '../goods/index'
 import User from '../user'
 import Order from '../order'
 import Carousel from '../carousel'
+import Category from '../category/'
 
 class Home extends PureComponent {
     
@@ -26,8 +28,10 @@ class Home extends PureComponent {
             return(<Goods/>)
         } else if (index === '3') {
             return(<Order/>)
-        } else {
+        } else if (index === '4'){
             return(<Carousel/>)
+        } else {
+            return(<Category/>)
         }
     }
     selectNavTitle(index) {
@@ -35,10 +39,12 @@ class Home extends PureComponent {
             return(<p>用户管理</p>)
         } else if (index === '2') {
             return(<p>商品管理</p>)
-        } else if(index === '3'){
+        } else if (index === '3') {
             return(<p>订单管理</p>)
-        } else {
+        } else if (index === '4') {
             return(<p>轮播图配置</p>)
+        } else {
+            return(<p>分类管理</p>)
         }
         
     }
@@ -54,13 +60,17 @@ class Home extends PureComponent {
                         <HeadDiv>
                             <HeadLogo/>
                             你好，mk
+                            <InfoUl>
+                                <li>修改密码</li>
+                                <li>注销</li>
+                            </InfoUl>
                         </HeadDiv>
                         <LeftNav>
                             <LeftItem className={index === '1' ? 'icon-user selected' : 'icon-user'}  onClick={()=>handleNavClick("1")} >用户管理</LeftItem>
                             <LeftItem className={index === '2' ? 'icon-goods selected' : 'icon-goods'} onClick={()=>handleNavClick("2")}>商品管理</LeftItem>
                             <LeftItem className={index === '3' ? 'icon-order selected' : 'icon-order'}  onClick={()=>handleNavClick("3")}>订单管理</LeftItem>
                             <LeftItem className='icon-statistic' onClick={()=>handleNavClick("4")}>轮播图配置</LeftItem>
-                            <LeftItem className='icon-analyse' onClick={()=>handleNavClick("5")}>热销商品配置</LeftItem>
+                            <LeftItem className='icon-analyse' onClick={()=>handleNavClick("5")}>分类管理</LeftItem>
                         </LeftNav>
                     </LfetContainer>
                     <RightContainer>

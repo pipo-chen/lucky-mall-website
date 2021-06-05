@@ -19,7 +19,7 @@ background-size: contain;
 `
 export const Top = styled.div `
 font-size: 20px;
-color: red;
+color: white;
 line-height:20px;
 position:relative;
 top: 20px;

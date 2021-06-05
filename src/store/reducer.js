@@ -7,6 +7,7 @@ import GoodsInfoReducer from '../pages/goods/goodsList/store/reducer'
 import GoodsListReducer from '../pages/goods/store/reducer'
 import UserReducer from '../pages/user/store/reducer'
 import CarouselReducer from '../pages/carousel/store/reducer'
+import CategoryReducer from '../pages/category/store/reducer'
 
 export default combineReducers({
     todo: TodoReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     goodsInfo: GoodsInfoReducer,
     goods: GoodsListReducer,
     user: UserReducer,
-    carousel: CarouselReducer
+    carousel: CarouselReducer,
+    category: CategoryReducer
 });

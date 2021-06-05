@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import * as constants from './constants'
 
-export default(state = fromJS({mouse: false, index: "4"}), action) => {
+export default(state = fromJS({mouse: false, index: "5"}), action) => {
     if (action.type === constants.MOUSE_ENTER) {
         return state.set("mouse",true);
     }
