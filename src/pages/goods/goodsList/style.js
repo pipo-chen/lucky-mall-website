@@ -1,6 +1,6 @@
 import styled  from 'styled-components'
-import LastIcon from '../../../assert/images/shangyiye.png'
-import NextIcon from '../../../assert/images/xiayiye.png'
+import LastIcon from '../../../assert/images/shangyiye_1.png'
+import NextIcon from '../../../assert/images/xiayiye_1.png'
 import SelectIcon from '../../../assert/images/select.png'
 import NoSelectIcon from '../../../assert/images/no-select.png'
 
@@ -63,13 +63,12 @@ p {
 export const PageButton = styled.button`
 width: 30px;
 height: 30px;
-border-radius: 4px;
-border: 1px solid #C0C4CC;
 background-color: white;
 background-repeat:no-repeat;
 background-position:0;
-background-size: 20px 20px;
+background-size: 30px 30px;
 background-image:url(${NextIcon});
+border: 0;
 margin: 0px 30px;
 &p {
     color: red;

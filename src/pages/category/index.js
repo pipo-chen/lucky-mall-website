@@ -21,7 +21,7 @@ import { Alert } from 'antd';
 class Category extends PureComponent {
     componentDidMount() {
         this.props.selectCategoryList();
-        this.props.selectSecondCategory(this.props.secondId);
+        this.props.selectSecondCategory(this.props.parentId);
         
     }
     render() {    
