@@ -87,3 +87,14 @@ line-height: 60px;
 text-align: left;
 padding-left: 5%;
 `
+
+export const Input = styled.input`
+margin-left: 5%;
+height : 20px;
+margin-top: 8px;
+display: none;
+
+&.show{
+    display: block;
+}
+`

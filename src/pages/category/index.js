@@ -5,7 +5,6 @@ import {
     Container,
     TopContainer
  } from "../goods/style";
-
 import {
     ShowContainer,
     LeftLevelDiv,
@@ -13,10 +12,10 @@ import {
     TopTitle,
     Detail,
     AddButton,
-    BottomContainer
+    BottomContainer,
+    Input
 } from './style'
-import { selectCategoryList, selectSecondCategoryList, addCategory} from './store/actionCreators'
-import { Alert } from 'antd';
+import { selectCategoryList, selectSecondCategoryList, addCategory, changeAddParent, changeAddChild, deleteCategory} from './store/actionCreators'
 
 class Category extends PureComponent {
     componentDidMount() {
@@ -24,30 +23,34 @@ class Category extends PureComponent {
         this.props.selectSecondCategory(this.props.parentId);
         
     }
-    render() {    
-        if (this.props.login) {
+    
+    render() {   
+        const {login, list, addParent, addChild, parentId, selectSecondCategory, handleInputCategory, addCategory, handleDelete} = this.props;
+
+        if (login) {
             return (
                 <Container>
                 <TopContainer>
                     <p>类别配置</p>
                 </TopContainer>
                 <BottomContainer>
-                <ShowContainer>
+                <ShowContainer>  
                     <LeftLevelDiv>
                         <TopTitle>一级类别</TopTitle>
                         <Detail>
                             {
-                                this.props.list.map((item) => {
+                                list.map((item) => {
                                     return(
-                                        <div key={item.categoryId}  onClick={()=>{this.props.selectSecondCategory(item.categoryId)}}>
+                                        <div key={item.categoryId}  onClick={()=>{selectSecondCategory(item.categoryId)}}>
                                             {item.categoryName}
                                             <span className="edit">编辑</span>
-                                            <span className="delete">删除</span>
+                                            <span className="delete" onClick={()=>{handleDelete(item.categoryId)}}>删除</span>
                                         </div>
                                     )
                                 })
                             }
                         </Detail>
+                        <Input className={addParent ? "show" : ""} ref={(input) => {this.parentName = input}} onBlur={()=>{handleInputCategory("0",this.parentName)}}/>
                         <AddButton onClick={()=>{this.props.addCategory()}}>
                             添加类别
                         </AddButton>
@@ -59,15 +62,16 @@ class Category extends PureComponent {
                             this.props.second.map((item) => {
                                 return(
                                     <div key={item.categoryId}>
-                                        {item.categoryName}
-                                        <span className="edit">编辑</span>
-                                        <span className="delete">删除</span>
+                                        <Input></Input>{item.categoryName}
+                                        <span className="edit" >编辑</span>
+                                        <span className="delete" onClick={()=>{handleDelete(parentId,item.categoryId)}}>删除</span>
                                     </div>
                                 )
                             })
                         }
                         </Detail>
-                        <AddButton onClick={()=>{this.props.addCategory(this.props.parentId)}}>
+                        <Input className={addChild ? "show" : ""} ref={(input) => {this.childName = input}} onBlur={()=>{handleInputCategory(parentId,this.childName)}}/>
+                        <AddButton onClick={()=>{addCategory(parentId)}}>
                             添加类别
                         </AddButton>
                     </RightLevelDiv>
@@ -87,6 +91,8 @@ const mapState = (state) => ({
     list : state.category.get("list"),
     second : state.category.get("second"),
     parentId: state.category.get("parentId"),
+    addParent: state.category.get("addParent"),
+    addChild : state.category.get("addChild")
 });
 const mapDispatch = (dispatch) => ({
     selectCategoryList() {
@@ -99,7 +105,22 @@ const mapDispatch = (dispatch) => ({
     },
     addCategory(parentId = 0) {
         // TODO 输入框 输入类名
+        if (parentId == 0) {
+            const action = changeAddParent(true);
+            dispatch(action);
+        } else {
+            const action = changeAddChild(true);
+            dispatch(action);
+        }
         
+    },
+    handleInputCategory(parentId, itemName) {
+        const action = addCategory(parentId, itemName.value);
+        dispatch(action);
+    },
+    handleDelete(parentId, categoryId) {
+        const action = deleteCategory(parentId, categoryId);
+        dispatch(action);
     }
     
 });
