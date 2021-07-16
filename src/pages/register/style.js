@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import loginPic from '../../assert/images/login-background.png'
 
+
 export const Container = styled.div`
 position: absolute;
 height:100%;
