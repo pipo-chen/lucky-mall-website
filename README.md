@@ -1,5 +1,7 @@
 # lucky mall website
 
+React 实现电商网站后台管理
+
 ## 1. 登录注册页
 - [x] 登录接口
 - [x] 登录界面
